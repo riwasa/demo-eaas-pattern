@@ -1,0 +1,15 @@
+name: Azure Pattern Deployment
+
+on: 
+  push:
+  workflow_dispatch:
+
+run-name: "Azure Pattern Deployment - Run: ${{ github.run_id }}"
+
+jobs:
+  First-Stage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: First step
+        run: echo "This is the first stage of the Azure pattern deployment workflow."
+        
