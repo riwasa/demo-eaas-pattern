@@ -18,13 +18,16 @@ on:
 run-name: "Azure Pattern Deployment - Run: ${{ github.run_id }}"
 
 jobs:
-  First-Stage:
+  Pattern-First-Stage:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4         
       - name: First step
         run: echo "This is the first stage of the Azure pattern deployment workflow."
       - name: Show parameters
         run: |
           echo "Pattern Name: ${{ inputs.pattern_name }}"
           echo "Pattern Size: ${{ inputs.pattern_size }}"
+      - name: Generate id
+        run: .\GenerateId.ps1 -patternName "${{ inputs.pattern_name }}" -patternSize "${{ inputs.pattern_size }}"
         
