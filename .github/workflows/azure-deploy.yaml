@@ -5,7 +5,15 @@ on:
   push:
   workflow_dispatch:
   workflow_call:
-
+    inputs:
+      pattern_name:
+        description: "Name of the Azure pattern to deploy."
+        required: true
+        type: string
+      pattern_size:
+        description: "Size of the Azure pattern to deploy."
+        required: true
+        type: string
 
 run-name: "Azure Pattern Deployment - Run: ${{ github.run_id }}"
 
@@ -15,4 +23,8 @@ jobs:
     steps:
       - name: First step
         run: echo "This is the first stage of the Azure pattern deployment workflow."
+      - name: Show parameters
+        run: |
+          echo "Pattern Name: ${{ inputs.pattern_name }}"
+          echo "Pattern Size: ${{ inputs.pattern_size }}"
         
