@@ -13,4 +13,5 @@ $timestamp = Get-Date -Format "yyyyMMddHHmmss"
 $uniqueId = "$patternName-$patternSize-$timestamp"
 
 Write-Host "Generated ID: $uniqueId"
+Write-Output $uniqueId
 
