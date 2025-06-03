@@ -1,8 +1,11 @@
+# This workflow is triggered by the LOB repo.
 name: Azure Pattern Deployment
 
 on: 
   push:
   workflow_dispatch:
+  workflow_call:
+
 
 run-name: "Azure Pattern Deployment - Run: ${{ github.run_id }}"
 
