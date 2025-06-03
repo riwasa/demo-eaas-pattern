@@ -14,10 +14,10 @@ on:
         description: "Size of the Azure pattern to deploy."
         required: true
         type: string
-    secrets:
-      token:
-        description: "Token for accessing the Azure resources."
-        required: true
+    # secrets:
+    #   token:
+    #     description: "Token for accessing the Azure resources."
+    #     required: true
 
 run-name: "Azure Pattern Deployment - Run: ${{ github.run_id }}"
 
@@ -29,7 +29,8 @@ jobs:
         with:
           repository: riwasa/demo-eaas-pattern
           ref: main     
-          token: ${{ secrets.token }}
+          token: ${{ secrets.DEMO_EAAS_PATTERN_TOKEN }}
+          #token: ${{ secrets.token }}
       - name: First step
         run: echo "This is the first stage of the Azure pattern deployment workflow."
       - name: Show parameters
