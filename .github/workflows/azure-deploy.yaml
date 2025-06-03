@@ -21,7 +21,10 @@ jobs:
   Pattern-First-Stage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4         
+      - uses: actions/checkout@v4    
+        with:
+          repository: riwasa/demo-eaas-pattern
+          ref: main     
       - name: First step
         run: echo "This is the first stage of the Azure pattern deployment workflow."
       - name: Show parameters
