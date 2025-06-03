@@ -25,6 +25,7 @@ jobs:
         with:
           repository: riwasa/demo-eaas-pattern
           ref: main     
+          token: ${{ secrets.DEMO_EAAS_PATTERN_TOKEN }}
       - name: First step
         run: echo "This is the first stage of the Azure pattern deployment workflow."
       - name: Show parameters
