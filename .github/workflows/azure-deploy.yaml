@@ -40,5 +40,7 @@ jobs:
       - name: Generate id
         shell: pwsh
         run: |
-          .\GenerateId.ps1 -patternName "${{ inputs.pattern_name }}" -patternSize "${{ inputs.pattern_size }}"
-        
+          $id = .\GenerateId.ps1 -patternName "${{ inputs.pattern_name }}" -patternSize "${{ inputs.pattern_size }}"
+          echo "id=$id" >> $env:GITHUB_OUTPUT
+      - name: Use generated id
+        run: echo "The generated id is ${{ steps.generate_id.outputs.id }}"
