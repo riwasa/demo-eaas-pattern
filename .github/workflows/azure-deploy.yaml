@@ -29,5 +29,7 @@ jobs:
           echo "Pattern Name: ${{ inputs.pattern_name }}"
           echo "Pattern Size: ${{ inputs.pattern_size }}"
       - name: Generate id
-        run: .\GenerateId.ps1 -patternName "${{ inputs.pattern_name }}" -patternSize "${{ inputs.pattern_size }}"
+        shell: pwsh
+        run: |
+          .\GenerateId.ps1 -patternName "${{ inputs.pattern_name }}" -patternSize "${{ inputs.pattern_size }}"
         
