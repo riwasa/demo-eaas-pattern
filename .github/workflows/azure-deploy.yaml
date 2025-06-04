@@ -67,8 +67,15 @@ jobs:
           template-file: ./pattern/app-pattern.bicep
           parameters: |
             {
-              "patternName": { "value": "${{ inputs.pattern_name }}" },
-              "patternSize": { "value": "${{ inputs.pattern_size }}" }
+              "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {
+              "patternName": {
+                "value": "${{ inputs.pattern_name }}"
+              },
+              "patternSize": {
+                "value": "${{ inputs.pattern_size }}"
+              }
             }
       - name: Print Deployment Outputs
         run: |
