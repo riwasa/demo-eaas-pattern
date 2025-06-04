@@ -58,17 +58,18 @@ jobs:
         id: deploy
         uses: azure/bicep-deploy@v2
         with:
-          name: deploy-pattern-${{ steps.generate_id}}
+          name: deploy-pattern-${{ steps.generate_id.outputs.id }}
           type: deployment
           operation: create
           scope: resourcegroup
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ${{ secrets.AZURE_RESOURCE_GROUP }}
           template-file: ./pattern/app-pattern.bicep
-          #parameters-file:
           parameters: |
-            patternName=${{ inputs.pattern_name }}
-            patternSize=${{ inputs.pattern_size }}
+            {
+              "patternName": { "value": "${{ inputs.pattern_name }}" },
+              "patternSize": { "value": "${{ inputs.pattern_size }}" }
+            }
       - name: Print Deployment Outputs
         run: |
           echo "Pattern Name Output: ${{ steps.deploy.outputs.patternNameOutput }}"
