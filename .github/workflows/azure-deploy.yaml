@@ -61,7 +61,7 @@ jobs:
           name: deploy-pattern-${{ steps.generate_id.outputs.id }}
           type: deployment
           operation: create
-          scope: resourcegroup
+          scope: resourceGroup
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ${{ secrets.AZURE_RESOURCE_GROUP }}
           template-file: ./pattern/app-pattern.bicep
