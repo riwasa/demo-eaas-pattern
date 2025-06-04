@@ -60,7 +60,7 @@ jobs:
   Pattern-Deploy-Stage:
     runs-on: ubuntu-latest
     needs: Pattern-First-Stage
-    environment: Azure
+    environment: Azure1
     steps:
       - uses: actions/checkout@v4
         with:
