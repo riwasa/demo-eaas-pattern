@@ -28,6 +28,8 @@ run-name: "Azure Pattern Deployment - Run: ${{ github.run_id }}"
 jobs:
   Pattern-First-Stage:
     runs-on: ubuntu-latest
+    outputs:
+      generated_id: ${{ steps.generate_id.outputs.id }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -58,11 +60,16 @@ jobs:
         uses: azure/login@v2.3.0
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+  Pattern-Deploy-Stage:
+    runs-on: ubuntu-latest
+    needs: Pattern-First-Stage
+    environment: Azure
+    steps:
       - name: Deploy Bicep template
         id: deploy
         uses: azure/bicep-deploy@v2
         with:
-          name: deploy-pattern-${{ steps.generate_id.outputs.id }}
+          name: deploy-pattern-${{ needs.Pattern-First-Stage.outputs.generated_id }}
           type: deployment
           operation: create
           scope: resourceGroup
