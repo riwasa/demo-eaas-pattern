@@ -65,6 +65,17 @@ jobs:
     needs: Pattern-First-Stage
     environment: Azure
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: lob
+      - uses: actions/checkout@v4    
+        with:
+          repository: riwasa/demo-eaas-pattern
+          ref: main     
+          token: ${{ secrets.DEMO_EAAS_PATTERN_TOKEN }}
+          #token: ${{ secrets.token }}
+          path: pattern
       - name: Deploy Bicep template
         id: deploy
         uses: azure/bicep-deploy@v2
