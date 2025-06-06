@@ -19,12 +19,14 @@ jobs:
       - name: Deploy Environment
         run: echo "This job sets up the environment for Azure pattern deployment."
       # Checkout LOB repository
-      - uses: actions/checkout@v4
+      - name: Checkout LOB repository
+        uses: actions/checkout@v4
         with:
           ref: main
           path: lob
       # Checkout the pattern repository
-      - uses: actions/checkout@v4    
+      - name : Checkout EaaS Pattern repository
+        uses: actions/checkout@v4    
         with:
           repository: riwasa/demo-eaas-pattern
           ref: main     
@@ -40,8 +42,6 @@ jobs:
         uses: azure/login@v2.3.0
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Display Region
-        run: echo "Azure region is ${{ steps.get-region.outputs.azureRegion }}"
       - name: Deploy Bicep template
         id: deploy
         uses: azure/bicep-deploy@v2
@@ -61,7 +61,7 @@ jobs:
         run: |
           $lifetimeCost = .\pattern\Calculate-LifetimeCost.ps1 -dailyRunCost "${{ steps.deploy.outputs.dailyRunCost }}" -eaasEndDate "${{ steps.deploy.outputs.eaasEndDate }}"
           echo "lifetimeCost=$lifetimeCost" >> $env:GITHUB_OUTPUT
-      - name: Add tags to resource group
+      - name: Add lifetime cost tag to resource group
         uses: azure/cli@v2
         with:
           inlineScript: |
