@@ -1,6 +1,8 @@
 param location string
 param tags object
 
+targetScope = 'resourceGroup'
+
 module storageAccount 'storage.bicep' = {
   name: 'StorageAccount'
   params: {
