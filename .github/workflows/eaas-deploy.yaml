@@ -4,19 +4,19 @@ name: Azure Pattern Deployment
 on: 
   workflow_dispatch:
   workflow_call:
-    inputs:
-      pattern_name:
-        description: "Name of the Azure pattern to deploy."
-        required: true
-        type: string
-      pattern_size:
-        description: "Size of the Azure pattern to deploy."
-        required: true
-        type: string
-      parameters_file:
-        description: "Path to the parameters file for the Azure pattern."
-        required: true
-        type: string
+    # inputs:
+    #   pattern_name:
+    #     description: "Name of the Azure pattern to deploy."
+    #     required: true
+    #     type: string
+    #   pattern_size:
+    #     description: "Size of the Azure pattern to deploy."
+    #     required: true
+    #     type: string
+    #   parameters_file:
+    #     description: "Path to the parameters file for the Azure pattern."
+    #     required: true
+    #     type: string
     # secrets:
     #   token:
     #     description: "Token for accessing the Azure resources."
