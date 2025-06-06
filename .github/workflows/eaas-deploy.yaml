@@ -30,6 +30,13 @@ jobs:
           ref: main     
           token: ${{ secrets.DEMO_EAAS_PATTERN_TOKEN }}
           path: pattern
+      - name: Get Azure region
+        id: get-region
+        shell: pwsh
+        run: |
+          $azureRegion = .\pattern\Get-AzureRegion.ps1 -filePath "./lob/${{ inputs.parameters_file }}"
+          echo "azureRegion=$azureRegion" >> $GITHUB_ENV
+          echo "Azure region set to: $azureRegion"
       - name: Log in to Azure
         uses: azure/login@v2.3.0
         with:
@@ -41,7 +48,7 @@ jobs:
           name: deploy-pattern-${{ github.run_id }}
           type: deployment
           operation: create
-          location: eastus2
+          location: ${{ steps.get-region.outputs.azureRegion }}
           scope: subscription
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           template-file: ./pattern/main.bicep
