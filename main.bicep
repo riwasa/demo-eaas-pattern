@@ -37,6 +37,8 @@ var tags object = {
 
 targetScope = 'subscription'
 
+var stampSize string = toLower(eaasStampSize)
+
 // Create a Resource Group.
 module eaasResourceGroup 'resource-group.bicep' = {
   name: resourceGroupName
@@ -49,7 +51,7 @@ module eaasResourceGroup 'resource-group.bicep' = {
 }
 
 // Call the appropriate module based on the environment stamp size.
-module smallStamp 'small.bicep' = if (eaasStampSize == 'Small') {
+module smallStamp 'small.bicep' = if (stampSize == 'small') {
   name: 'SmallEnvironmentStamp'
   dependsOn: [
     eaasResourceGroup
@@ -61,9 +63,9 @@ module smallStamp 'small.bicep' = if (eaasStampSize == 'Small') {
   scope: resourceGroup(resourceGroupName)
 }
 
-var smallRunCost string = ((eaasStampSize == 'Small') ? smallStamp.outputs.dailyRunCost : null)!
-var mediumRunCost string = ((eaasStampSize == 'Medium') ? '45.67' : null)!
-var largeRunCost string = ((eaasStampSize == 'Large') ? '67.89' : null)!
+var smallRunCost string = ((stampSize == 'small') ? smallStamp.outputs.dailyRunCost : null)!
+var mediumRunCost string = ((stampSize == 'medium') ? '45.67' : null)!
+var largeRunCost string = ((stampSize == 'large') ? '67.89' : null)!
 
 output dailyRunCost string = largeRunCost ?? mediumRunCost ?? smallRunCost ?? '0.00'
 output eaasEndDate string = eaasEndDate
