@@ -1,5 +1,5 @@
 # This workflow is triggered by the LOB repo.
-name: Azure Pattern Deployment
+name: EaaS Pattern Deployment
 
 on: 
   workflow_dispatch:
@@ -10,7 +10,7 @@ on:
         required: true
         type: string
 
-run-name: "Azure Pattern Deployment - Run: ${{ github.run_id }}"
+run-name: "EaaS Pattern Deployment - Run: ${{ github.run_id }}"
 
 jobs:
   Deploy-Environment:
@@ -53,28 +53,8 @@ jobs:
         run: |
           $lifetimeCost = .\pattern\Calculate-LifetimeCost.ps1 -dailyRunCost "${{ steps.deploy.outputs.dailyRunCost }}" -eaasEndDate "${{ steps.deploy.outputs.eaasEndDate }}"
           echo "lifetimeCost=$lifetimeCost" >> $env:GITHUB_OUTPUT
-      - name: Display Lifetime Cost
-        run: echo "The lifetime cost is ${{ steps.calculate-cost.outputs.lifetimeCost }}"
-      - name: Display tags
-        run: echo "The tags are ${{ steps.deploy.outputs.tags }}"
-      # Use Azure CLI to add tags to the resource group
       - name: Add tags to resource group
         uses: azure/cli@v2
         with:
           inlineScript: |
             az group update --name ${{ steps.deploy.outputs.resourceGroupName }} --set tags.lifetimeCost="${{ steps.calculate-cost.outputs.lifetimeCost }}"
-
-
-
-      # - name: Update lifetime cost
-      #   id: update-lifetime-cost
-      #   uses: azure/bicep-deploy@v2
-      #   with:
-      #     name: update-lifetime-cost-${{ github.run_id }}
-      #     type: deployment
-      #     operation: create
-      #     location: eastus2
-      #     scope: subscription
-      #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      #     template-file: ./pattern/lifetime-cost.bicep
-      #     parameters: '{ "azureRegion": "eastus2", "lifetimeCost": "${{ steps.calculate-cost.outputs.lifetimeCost }}", "resourceGroupName": "${{ steps.deploy.outputs.resourceGroupName }}", "tags": "${{ steps.deploy.outputs.tags }}" }'
