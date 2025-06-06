@@ -41,6 +41,8 @@ jobs:
         uses: azure/login@v2.3.0
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Display Region
+        run: echo "Azure region is ${{ steps.get-region.outputs.azureRegion }}"
       - name: Deploy Bicep template
         id: deploy
         uses: azure/bicep-deploy@v2
