@@ -16,6 +16,18 @@ param eaasRequestorTeam string
 @description('The id of the ServiceNow ticket associated with the environment request.')
 param eaasServiceNowTicketId string
 
+@description('The name of the pipeline that will deploy the environment.')
+param pipelineName string
+
+@description('The run id of the pipeline')
+param pipelineRunId string
+
+@description('The name of the user who triggered the pipeline.')
+param pipelineTriggerUser string
+
+@description('The name of the user parameters file.')
+param userInputParamFile string
+
 @description('The size of the environment stamp.')
 @allowed([
   'Small'
@@ -27,12 +39,19 @@ param eaasStampSize string
 @description('The name of the resource group to create. This will be unique for each deployment.')
 param resourceGroupName string = 'MRNG-EaaS-Stamp-${uniqueString(newGuid())}'
 
+var eaasTemplateNameAndVersion string = 'main.bicep@1.0.0'
+
 var tags object = {
   AppCatId: appCatId
   eaasEndDate: eaasEndDate
   eaasServiceNowTicketId: eaasServiceNowTicketId
   eaasRequestorTeam: eaasRequestorTeam
   eaasStampSize: eaasStampSize
+  eaasTemplateNameAndVersion: eaasTemplateNameAndVersion
+  pipelineNameAndVersion: pipelineName
+  pipelineRunId: pipelineRunId
+  pipelineTriggerUser: pipelineTriggerUser
+  userInputParamFile: userInputParamFile  
 }
 
 targetScope = 'subscription'

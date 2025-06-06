@@ -46,6 +46,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           template-file: ./pattern/main.bicep
           parameters-file: ./lob/${{ inputs.parameters_file }}
+          parameters: '{ "pipelineName": "${{ github.workflow }}", "pipelineRunId": "${{ github.run_id }}", "pipelineTriggerUser": "${{ github.actor }}", "userInputParamFile": "${{ inputs.parameters_file }}" }'
       - name: Calculate lifetime cost
         id: calculate-cost
         shell: pwsh
