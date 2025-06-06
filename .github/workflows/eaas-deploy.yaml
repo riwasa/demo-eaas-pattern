@@ -46,4 +46,4 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           template-file: ./pattern/main.bicep
           parameters-file: ./lob/${{ inputs.parameters_file }}
-          #parameters: '{ "appCatId": "MRNG-20982", "azureRegion": "eastus2", "azureSubscription": "${{ secrets.AZURE_SUBSCRIPTION_ID }}", "eaasEndDate": "2025-12-31", "eaasRequestorTeam": "Team 1", "eaasServiceNowTicketId": "INC1234567", "eaasStampSize": "Small" }'
+

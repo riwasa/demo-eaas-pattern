@@ -37,6 +37,7 @@ var tags object = {
 
 targetScope = 'subscription'
 
+// Create a Resource Group.
 module resourceGroup 'resource-group.bicep' = {
   name: resourceGroupName
   params: {
@@ -46,3 +47,14 @@ module resourceGroup 'resource-group.bicep' = {
   }
   scope: subscription(azureSubscription)
 }
+
+// Call the appropriate module based on the environment stamp size.
+module smallStamp 'small.bicep' = if (eaasStampSize == 'Small') {
+  name: 'SmallEnvironmentStamp'
+  params: {
+    location: azureRegion
+    tags: tags
+  }
+  scope: resourceGroup
+}
+
