@@ -82,9 +82,33 @@ module smallStamp 'small.bicep' = if (stampSize == 'small') {
   scope: resourceGroup(resourceGroupName)
 }
 
+module mediumStamp 'medium.bicep' = if (stampSize == 'medium') {
+  name: 'MediumEnvironmentStamp'
+  dependsOn: [
+    eaasResourceGroup
+  ]
+  params: {
+    location: azureRegion
+    tags: tags
+  }
+  scope: resourceGroup(resourceGroupName)
+}
+
+module largeStamp 'large.bicep' = if (stampSize == 'large') {
+  name: 'LargeEnvironmentStamp'
+  dependsOn: [
+    eaasResourceGroup
+  ]
+  params: {
+    location: azureRegion
+    tags: tags
+  }
+  scope: resourceGroup(resourceGroupName)
+}
+
 var smallRunCost string = ((stampSize == 'small') ? smallStamp.outputs.dailyRunCost : null)!
-var mediumRunCost string = ((stampSize == 'medium') ? '45.67' : null)!
-var largeRunCost string = ((stampSize == 'large') ? '67.89' : null)!
+var mediumRunCost string = ((stampSize == 'medium') ? mediumStamp.outputs.dailyRunCost : null)!
+var largeRunCost string = ((stampSize == 'large') ? largeStamp.outputs.dailyRunCost : null)!
 
 var dailyRunCost string = smallRunCost ?? mediumRunCost ?? largeRunCost ?? '0.00'
 
