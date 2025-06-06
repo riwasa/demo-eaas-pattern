@@ -37,7 +37,7 @@ jobs:
       - name: Log in to Azure
         uses: azure/login@v2.3.0
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS_PATTERN }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy Bicep template
         id: deploy
         uses: azure/bicep-deploy@v2
@@ -47,7 +47,7 @@ jobs:
           operation: create
           location: eastus2
           scope: subscription
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID_PATTERN }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           template-file: ./pattern/main.bicep
           #parameters-file: ./lob/${{ inputs.parameters_file }}
-          parameters: '{ "appCatId": "MRNG-20982", "azureRegion": "eastus2", "azureSubscription": "${{ secrets.AZURE_SUBSCRIPTION_ID_PATTERN }}", "eaasEndDate": "2025-12-31", "eaasRequestorTeam": "Team 1", "eaasServiceNowTicketId": "INC1234567", "eaasStampSize": "Small" }'
+          parameters: '{ "appCatId": "MRNG-20982", "azureRegion": "eastus2", "azureSubscription": "${{ secrets.AZURE_SUBSCRIPTION_ID }}", "eaasEndDate": "2025-12-31", "eaasRequestorTeam": "Team 1", "eaasServiceNowTicketId": "INC1234567", "eaasStampSize": "Small" }'
