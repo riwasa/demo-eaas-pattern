@@ -15,6 +15,7 @@ run-name: "EaaS Pattern Deployment - Run: ${{ github.run_id }}"
 jobs:
   Deploy-Environment:
     runs-on: ubuntu-latest
+    environment: EaaS
     steps:
       - name: Deploy Environment
         run: echo "This job sets up the environment for Azure pattern deployment."
