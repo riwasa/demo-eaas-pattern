@@ -1,6 +1,8 @@
 param location string
 param tags object
 
+var dailyRunCost string = '23.45'
+
 module storageAccount 'storage.bicep' = {
   name: 'StorageAccount'
   params: {
@@ -11,4 +13,5 @@ module storageAccount 'storage.bicep' = {
   }
 }
 
+output dailyRunCost string = dailyRunCost
 output storageAccountName string = storageAccount.name

@@ -60,3 +60,7 @@ module smallStamp 'small.bicep' = if (eaasStampSize == 'Small') {
   }
   scope: resourceGroup(resourceGroupName)
 }
+
+output dailyRunCost string = smallStamp.outputs.dailyRunCost
+output eaasEndDate string = eaasEndDate
+output resourceGroupName string = resourceGroupName

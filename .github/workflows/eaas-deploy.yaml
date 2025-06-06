@@ -46,4 +46,11 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           template-file: ./pattern/main.bicep
           parameters-file: ./lob/${{ inputs.parameters_file }}
-
+      - name: Calculate lifetime cost
+        id: calculate-cost
+        shell: pwsh
+        run: |
+          $lifetimeCost = .\pattern\CalculateLifetimeCost.ps1 -dailyRunCost "${{ steps.deploy.outputs.dailyRunCost }}" -eaasEndDate "${{ steps.deploy.outputs.eaasEndDate }}"
+          echo "lifetimeCost=$lifetimeCost" >> $env:GITHUB_OUTPUT
+      - name: Display Lifetime Cost
+        run: echo "The lifetime cost is ${{ steps.calculate-cost.outputs.lifetimeCost }}"
