@@ -1,8 +1,6 @@
 param location string
 param tags object
 
-targetScope = 'resourceGroup'
-
 module storageAccount 'storage.bicep' = {
   name: 'StorageAccount'
   params: {
@@ -12,3 +10,5 @@ module storageAccount 'storage.bicep' = {
     tags: tags
   }
 }
+
+output storageAccountName string = storageAccount.name
