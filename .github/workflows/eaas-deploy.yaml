@@ -55,6 +55,8 @@ jobs:
           echo "lifetimeCost=$lifetimeCost" >> $env:GITHUB_OUTPUT
       - name: Display Lifetime Cost
         run: echo "The lifetime cost is ${{ steps.calculate-cost.outputs.lifetimeCost }}"
+      - name: Display tags
+        run: echo "The tags are ${{ steps.deploy.outputs.tags }}"
       - name: Update lifetime cost
         id: update-lifetime-cost
         uses: azure/bicep-deploy@v2
