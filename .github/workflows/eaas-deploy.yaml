@@ -50,7 +50,7 @@ jobs:
         id: calculate-cost
         shell: pwsh
         run: |
-          $lifetimeCost = .\pattern\CalculateLifetimeCost.ps1 -dailyRunCost "${{ steps.deploy.outputs.dailyRunCost }}" -eaasEndDate "${{ steps.deploy.outputs.eaasEndDate }}"
+          $lifetimeCost = .\pattern\Calculate-LifetimeCost.ps1 -dailyRunCost "${{ steps.deploy.outputs.dailyRunCost }}" -eaasEndDate "${{ steps.deploy.outputs.eaasEndDate }}"
           echo "lifetimeCost=$lifetimeCost" >> $env:GITHUB_OUTPUT
       - name: Display Lifetime Cost
         run: echo "The lifetime cost is ${{ steps.calculate-cost.outputs.lifetimeCost }}"
