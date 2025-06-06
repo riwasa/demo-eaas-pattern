@@ -51,6 +51,9 @@ module eaasResourceGroup 'resource-group.bicep' = {
 // Call the appropriate module based on the environment stamp size.
 module smallStamp 'small.bicep' = if (eaasStampSize == 'Small') {
   name: 'SmallEnvironmentStamp'
+  dependsOn: [
+    eaasResourceGroup
+  ]
   params: {
     location: azureRegion
     tags: tags
