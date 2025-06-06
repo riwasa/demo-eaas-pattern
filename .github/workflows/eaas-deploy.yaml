@@ -35,7 +35,7 @@ jobs:
         shell: pwsh
         run: |
           $azureRegion = .\pattern\Get-AzureRegion.ps1 -filePath "./lob/${{ inputs.parameters_file }}"
-          echo "azureRegion=$azureRegion" >> $env:GITHUB_ENV
+          echo "azureRegion=$azureRegion" >> $env:GITHUB_OUTPUT
       - name: Log in to Azure
         uses: azure/login@v2.3.0
         with:
