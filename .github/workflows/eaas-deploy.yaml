@@ -55,3 +55,15 @@ jobs:
           echo "lifetimeCost=$lifetimeCost" >> $env:GITHUB_OUTPUT
       - name: Display Lifetime Cost
         run: echo "The lifetime cost is ${{ steps.calculate-cost.outputs.lifetimeCost }}"
+      - name: Update lifetime cost
+        id: update-lifetime-cost
+        uses: azure/bicep-deploy@v2
+        with:
+          name: update-lifetime-cost-${{ github.run_id }}
+          type: deployment
+          operation: create
+          location: eastus2
+          scope: subscription
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          template-file: ./pattern/lifetime-cost.bicep
+          parameters: '{ "azureRegion": "eastus2", "lifetimeCost": "${{ steps.calculate-cost.outputs.lifetimeCost }}", "resourceGroupName": "${{ steps.deploy.outputs.resourceGroupName }}", "tags": "${{ steps.deploy.outputs.tags }}" }'

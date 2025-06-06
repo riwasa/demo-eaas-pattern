@@ -86,6 +86,9 @@ var smallRunCost string = ((stampSize == 'small') ? smallStamp.outputs.dailyRunC
 var mediumRunCost string = ((stampSize == 'medium') ? '45.67' : null)!
 var largeRunCost string = ((stampSize == 'large') ? '67.89' : null)!
 
-output dailyRunCost string = largeRunCost ?? mediumRunCost ?? smallRunCost ?? '0.00'
+var dailyRunCost string = smallRunCost ?? mediumRunCost ?? largeRunCost ?? '0.00'
+
+output dailyRunCost string = dailyRunCost
 output eaasEndDate string = eaasEndDate
 output resourceGroupName string = resourceGroupName
+output tags object = tags
