@@ -91,4 +91,4 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           template-file: ./pattern/main.bicep
           parameters-file: ./lob/${{ inputs.parameters_file }}
-          parameters: '{ "lifetimeCost": "${{ needs.Calculate-Run-Costs.outputs.lifetimeCost }}" }'
+          #parameters: '{ "lifetimeCost": "${{ needs.Calculate-Run-Costs.outputs.lifetimeCost }}" }'
