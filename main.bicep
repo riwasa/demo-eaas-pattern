@@ -16,6 +16,9 @@ param eaasRequestorTeam string
 @description('The id of the ServiceNow ticket associated with the environment request.')
 param eaasServiceNowTicketId string
 
+@description('The lifetime cost of the environment.')
+param lifetimeCost string = '0.00'
+
 @description('The name of the pipeline that will deploy the environment.')
 param pipelineName string
 
@@ -48,6 +51,7 @@ var tags object = {
   eaasRequestorTeam: eaasRequestorTeam
   eaasStampSize: eaasStampSize
   eaasTemplateNameAndVersion: eaasTemplateNameAndVersion
+  lifetimeCost: lifetimeCost
   pipelineNameAndVersion: pipelineName
   pipelineRunId: pipelineRunId
   pipelineTriggerUser: pipelineTriggerUser
