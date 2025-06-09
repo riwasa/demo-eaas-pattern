@@ -1,9 +1,7 @@
 param(
   [Parameter(Mandatory = $true, Position = 0)]
-  [string]$lobFilePath
-)
+  [string]$lobFilePath,
 
-param(
   [Parameter(Mandatory = $true, Position = 1)]
   [string]$eaasStampFileRoot
 )
