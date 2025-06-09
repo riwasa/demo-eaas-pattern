@@ -26,12 +26,17 @@ Write-Host "Calculating lifetime cost based on daily run cost: $dailyRunCost and
 
 # Convert the daily run cost to a decimal
 $dailyRunCostDecimal = [decimal]$dailyRunCost
+
 # Convert the end date to a DateTime object
 $endDate = [datetime]$eaasEndDate
+
 # Get the current date
 $currentDate = Get-Date
+
 # Calculate the number of days until the end date
 $runtimeDays = ($endDate - $currentDate).Days
+Write-Host "Runtime days until end date: $runtimeDays"
+
 # Calculate the lifetime cost
 $lifetimeCost = $dailyRunCostDecimal * $runtimeDays
 
