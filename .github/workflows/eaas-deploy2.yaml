@@ -37,7 +37,7 @@ jobs:
         id: calculate-cost
         shell: pwsh
         run: |
-          $lifetimeCost = .\pattern\Calculate-LifetimeCost2.ps1 -lobFilePath "./lob/${{ inputs.parameters_file }}" -eaasStampFilePath "./pattern"
+          $lifetimeCost = .\pattern\Calculate-LifetimeCost2.ps1 -lobFilePath "./lob/${{ inputs.parameters_file }}" -eaasStampFileRoot "./pattern"
           echo "lifetimeCost=$lifetimeCost" >> $env:GITHUB_OUTPUT
 
 
