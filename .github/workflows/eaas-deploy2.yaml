@@ -89,6 +89,11 @@ jobs:
           location: ${{ steps.get-region.outputs.azureRegion }}
           scope: subscription
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          template-file: ./pattern/main.bicep
+          template-file: ./pattern/main2.bicep
           parameters-file: ./lob/${{ inputs.parameters_file }}
           parameters: '{ "lifetimeCost": "${{ needs.Calculate-Run-Costs.outputs.lifetimeCost }}", "pipelineName": "${{ github.workflow }}", "pipelineRunId": "${{ github.run_id }}", "pipelineTriggerUser": "${{ github.actor }}", "userInputParamFile": "${{ inputs.parameters_file }}" }'
+
+      - name: Output deployment details
+        id: output-deployment
+        run: |
+          echo "Resource Group Name: ${{ steps.deploy.outputs.resourceGroupName }}"
