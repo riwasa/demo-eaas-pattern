@@ -110,13 +110,4 @@ module largeStamp 'large.bicep' = if (stampSize == 'large') {
   scope: resourceGroup(resourceGroupName)
 }
 
-var smallRunCost string = ((stampSize == 'small') ? smallStamp.outputs.dailyRunCost : null)!
-var mediumRunCost string = ((stampSize == 'medium') ? mediumStamp.outputs.dailyRunCost : null)!
-var largeRunCost string = ((stampSize == 'large') ? largeStamp.outputs.dailyRunCost : null)!
-
-var dailyRunCost string = smallRunCost ?? mediumRunCost ?? largeRunCost ?? '0.00'
-
-output dailyRunCost string = dailyRunCost
-output eaasEndDate string = eaasEndDate
 output resourceGroupName string = resourceGroupName
-output tags object = tags
