@@ -19,7 +19,7 @@ $eaasStampFilePath = "$eaasStampFileRoot/$($eaasStampSize.ToLower())-param.json"
 Write-Host "Reading EaaS stamp file paramaters from file: $eaasStampFilePath"
 $eaasStampJson = Get-Content -Path $eaasStampFilePath -Raw | ConvertFrom-Json
 
-$dailyRunCost = $eaasStampJson.dailyRunCost.value
+$dailyRunCost = $eaasStampJson.dailyRunCost
 Write-Host "Daily run cost: $dailyRunCost"
 
 Write-Host "Calculating lifetime cost based on daily run cost: $dailyRunCost and end date: $eaasEndDate"
