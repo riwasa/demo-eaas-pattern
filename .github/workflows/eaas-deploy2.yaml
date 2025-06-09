@@ -1,5 +1,5 @@
 # This workflow is triggered by the LOB repo.
-name: EaaS Pattern Deployment
+name: EaaS Pattern Deployment v2
 
 on: 
   workflow_dispatch:
@@ -10,7 +10,7 @@ on:
         required: true
         type: string
 
-run-name: "EaaS Pattern Deployment - Run: ${{ github.run_id }}"
+run-name: "EaaS Pattern Deployment v2 - Run: ${{ github.run_id }}"
 
 jobs:
   Calculate-Run-Costs:
