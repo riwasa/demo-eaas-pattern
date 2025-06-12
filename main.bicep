@@ -130,4 +130,8 @@ module largeStamp 'large.bicep' = if (stampSize == 'large') {
 }
 
 output resourceGroupName string = resourceGroupName
-output vmNames array = concat(smallStamp.outputs.vmNames, mediumStamp.outputs.vmNames, largeStamp.outputs.vmNames)
+output vmNames array = concat(
+  (stampSize == 'small' ? smallStamp.outputs.vmNames : []),
+  (stampSize == 'medium' ? mediumStamp.outputs.vmNames : []),
+  (stampSize == 'large' ? largeStamp.outputs.vmNames : [])
+)
