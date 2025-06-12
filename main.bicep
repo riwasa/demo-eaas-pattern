@@ -1,3 +1,13 @@
+@description('The password for the virtual machine administrator.')
+@secure()
+param adminPassword string
+
+@description('The admin username for the virtual machine.')
+param adminUsername string
+
+@description('The email address to receive notifications for the auto-shutdown of the virtual machine.')
+param autoShutdownEmailRecipient string
+
 @description('The application catalog id.')
 param appCatId string
 
@@ -74,17 +84,17 @@ module eaasResourceGroup 'resource-group.bicep' = {
 }
 
 // Call the appropriate module based on the environment stamp size.
-module smallStamp 'small.bicep' = if (stampSize == 'small') {
-  name: 'SmallEnvironmentStamp'
-  dependsOn: [
-    eaasResourceGroup
-  ]
-  params: {
-    location: azureRegion
-    tags: tags
-  }
-  scope: resourceGroup(resourceGroupName)
-}
+// module smallStamp 'small.bicep' = if (stampSize == 'small') {
+//   name: 'SmallEnvironmentStamp'
+//   dependsOn: [
+//     eaasResourceGroup
+//   ]
+//   params: {
+//     location: azureRegion
+//     tags: tags
+//   }
+//   scope: resourceGroup(resourceGroupName)
+// }
 
 module mediumStamp 'medium.bicep' = if (stampSize == 'medium') {
   name: 'MediumEnvironmentStamp'
@@ -92,31 +102,28 @@ module mediumStamp 'medium.bicep' = if (stampSize == 'medium') {
     eaasResourceGroup
   ]
   params: {
+    adminPassword: adminPassword
+    adminUsername: adminUsername
+    autoShutdownEmailRecipient: autoShutdownEmailRecipient
     location: azureRegion
     tags: tags
   }
   scope: resourceGroup(resourceGroupName)
 }
 
-module largeStamp 'large.bicep' = if (stampSize == 'large') {
-  name: 'LargeEnvironmentStamp'
-  dependsOn: [
-    eaasResourceGroup
-  ]
-  params: {
-    location: azureRegion
-    tags: tags
-  }
-  scope: resourceGroup(resourceGroupName)
-}
+// module largeStamp 'large.bicep' = if (stampSize == 'large') {
+//   name: 'LargeEnvironmentStamp'
+//   dependsOn: [
+//     eaasResourceGroup
+//   ]
+//   params: {
+//     location: azureRegion
+//     tags: tags
+//   }
+//   scope: resourceGroup(resourceGroupName)
+// }
 
-var smallRunCost string = ((stampSize == 'small') ? smallStamp.outputs.dailyRunCost : null)!
-var mediumRunCost string = ((stampSize == 'medium') ? mediumStamp.outputs.dailyRunCost : null)!
-var largeRunCost string = ((stampSize == 'large') ? largeStamp.outputs.dailyRunCost : null)!
+// output resourceGroupName string = resourceGroupName
 
-var dailyRunCost string = smallRunCost ?? mediumRunCost ?? largeRunCost ?? '0.00'
-
-output dailyRunCost string = dailyRunCost
-output eaasEndDate string = eaasEndDate
-output resourceGroupName string = resourceGroupName
-output tags object = tags
+// output resourceGroupName string = resourceGroupName
+// output vmNames array = mediumStamp.outputs.vmNames
