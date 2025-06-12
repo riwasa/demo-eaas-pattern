@@ -119,8 +119,8 @@ module vms 'vm.bicep' = [for i in range(0, length(vmParams)): {
   params: {
     adminPassword: vmParams[i].adminPassword
     adminUsername: vmParams[i].adminUsername
-    autoShutdownEmailRecipient: vmParams[i].autoShutdownEmailRecipient
-    autoShutdownTime: vmParams[i].autoShutdownTime
+    autoShutdownEmailRecipient: empty(vmParams[i].autoShutdownEmailRecipient) ? '' : vmParams[i].autoShutdownEmailRecipient
+    autoShutdownTime: empty(vmParams[i].autoShutdownTime) ? '' : vmParams[i].autoShutdownTime
     dataDisks: vmParams[i].dataDisks
     enableAcceleratedNetworking: vmParams[i].enableAcceleratedNetworking
     hibernationEnabled: vmParams[i].hibernationEnabled
