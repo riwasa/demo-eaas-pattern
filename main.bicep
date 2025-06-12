@@ -84,17 +84,20 @@ module eaasResourceGroup 'resource-group.bicep' = {
 }
 
 // Call the appropriate module based on the environment stamp size.
-// module smallStamp 'small.bicep' = if (stampSize == 'small') {
-//   name: 'SmallEnvironmentStamp'
-//   dependsOn: [
-//     eaasResourceGroup
-//   ]
-//   params: {
-//     location: azureRegion
-//     tags: tags
-//   }
-//   scope: resourceGroup(resourceGroupName)
-// }
+module smallStamp 'small.bicep' = if (stampSize == 'small') {
+  name: 'SmallEnvironmentStamp'
+  dependsOn: [
+    eaasResourceGroup
+  ]
+  params: {
+    adminPassword: adminPassword
+    adminUsername: adminUsername
+    autoShutdownEmailRecipient: autoShutdownEmailRecipient
+    location: azureRegion
+    tags: tags
+  }
+  scope: resourceGroup(resourceGroupName)
+}
 
 module mediumStamp 'medium.bicep' = if (stampSize == 'medium') {
   name: 'MediumEnvironmentStamp'
@@ -111,17 +114,20 @@ module mediumStamp 'medium.bicep' = if (stampSize == 'medium') {
   scope: resourceGroup(resourceGroupName)
 }
 
-// module largeStamp 'large.bicep' = if (stampSize == 'large') {
-//   name: 'LargeEnvironmentStamp'
-//   dependsOn: [
-//     eaasResourceGroup
-//   ]
-//   params: {
-//     location: azureRegion
-//     tags: tags
-//   }
-//   scope: resourceGroup(resourceGroupName)
-// }
+module largeStamp 'large.bicep' = if (stampSize == 'large') {
+  name: 'LargeEnvironmentStamp'
+  dependsOn: [
+    eaasResourceGroup
+  ]
+  params: {
+    adminPassword: adminPassword
+    adminUsername: adminUsername
+    autoShutdownEmailRecipient: autoShutdownEmailRecipient
+    location: azureRegion
+    tags: tags
+  }
+  scope: resourceGroup(resourceGroupName)
+}
 
 output resourceGroupName string = resourceGroupName
 output vmNames array = mediumStamp.outputs.vmNames
