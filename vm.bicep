@@ -102,6 +102,9 @@ resource nic 'Microsoft.Network/networkInterfaces@2024-07-01' = {
   #disable-next-line use-stable-resource-identifiers // The name must be unique on every call.
   name: '${vmName}-nic'
   location: location
+  dependsOn: [
+    vNetSubnet
+  ]
   properties: {
     enableAcceleratedNetworking: enableAcceleratedNetworking
     ipConfigurations: [
@@ -143,6 +146,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-11-01' = {
   #disable-next-line use-stable-resource-identifiers // The name must be unique on every call.
   dependsOn: [
     managedDataDisks
+    nic
   ]
   name: vmName
   location: location
@@ -233,6 +237,9 @@ resource autoShutdownSchedule 'Microsoft.DevTestLab/schedules@2018-09-15' = if (
   #disable-next-line use-stable-resource-identifiers // The name must be unique on every call.
   name: 'shutdown-computevm-${vmName}'
   location: location
+  dependsOn: [
+    vm
+  ]
   properties: {
     dailyRecurrence: {
       time: autoShutdownTime
