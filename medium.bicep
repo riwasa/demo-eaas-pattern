@@ -100,6 +100,6 @@ module vmNoShutdown 'vm.bicep' = {
 }
 
 output vmNames array = [
-  vmWithShutdown.name
-  vmNoShutdown.name
+  vmWithShutdown.outputs.vmName
+  vmNoShutdown.outputs.vmName
 ]
