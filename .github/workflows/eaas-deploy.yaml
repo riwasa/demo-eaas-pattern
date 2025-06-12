@@ -97,3 +97,4 @@ jobs:
         id: output-deployment
         run: |
           echo "Resource Group Name: ${{ steps.deploy.outputs.resourceGroupName }}"
+          echo "VM Names: ${{ steps.deploy.outputs.vmNames }}"

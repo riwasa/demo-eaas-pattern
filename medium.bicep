@@ -52,10 +52,6 @@ var dataDisks = [
   dataDisk2
 ]
 
-// update main.bicep
-// update secrets in workflow
-// update workflow to pass secrets
-
 // Create a virtual machine with an auto-shutdown schedule.
 module vmWithShutdown 'vm.bicep' = {
   name: 'VirtualMachineWithShutdown'
