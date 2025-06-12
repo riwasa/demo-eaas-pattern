@@ -130,4 +130,4 @@ module largeStamp 'large.bicep' = if (stampSize == 'large') {
 }
 
 output resourceGroupName string = resourceGroupName
-output vmNames array = mediumStamp.outputs.vmNames
+output vmNames array = smallStamp.outputs.vmNames ?? mediumStamp.outputs.vmNames ?? largeStamp.outputs.vmNames ?? []
