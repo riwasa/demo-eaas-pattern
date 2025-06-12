@@ -141,6 +141,9 @@ resource managedDataDisks 'Microsoft.Compute/disks@2024-03-02' = [
 // Create a virtual machine.
 resource vm 'Microsoft.Compute/virtualMachines@2024-11-01' = {
   #disable-next-line use-stable-resource-identifiers // The name must be unique on every call.
+  dependsOn: [
+    managedDataDisks
+  ]
   name: vmName
   location: location
   identity: {
