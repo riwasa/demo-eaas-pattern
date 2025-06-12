@@ -125,5 +125,5 @@ module mediumStamp 'medium.bicep' = if (stampSize == 'medium') {
 
 // output resourceGroupName string = resourceGroupName
 
-output resourceGroupName string = resourceGroupName
-output vmNames array = mediumStamp.outputs.vmNames
+// output resourceGroupName string = resourceGroupName
+// output vmNames array = mediumStamp.outputs.vmNames
