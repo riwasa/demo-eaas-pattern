@@ -83,6 +83,8 @@ module vmNoShutdown 'vm.bicep' = {
   params: {
     adminPassword: adminPassword
     adminUsername: adminUsername
+    autoShutdownEmailRecipient: ''
+    autoShutdownTime: ''
     enableAcceleratedNetworking: enableAcceleratedNetworking
     hibernationEnabled: hibernationEnabled
     location: location
