@@ -96,8 +96,8 @@ var vmParams array = [
   {
     adminPassword: adminPassword
     adminUsername: adminUsername
-    autoShutdownEmailRecipient: autoShutdownEmailRecipient
-    autoShutdownTime: autoShutdownTime
+    autoShutdownEmailRecipient: ''
+    autoShutdownTime: ''
     dataDisks: dataDisks
     enableAcceleratedNetworking: enableAcceleratedNetworking
     hibernationEnabled: hibernationEnabled
