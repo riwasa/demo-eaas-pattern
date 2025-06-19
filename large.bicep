@@ -115,7 +115,9 @@ var vmParams array = [
     vNetResourceGroupName: vNetResourceGroupName
     vNetSubnetName: vNetSubnetName
     windowsLicenseType: windowsLicenseType
-    tags: tags
+    tags: union(tags, {
+      eaasAllowShutdown: 'no'
+    })
   }
 ]
 

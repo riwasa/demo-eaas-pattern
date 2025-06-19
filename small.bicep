@@ -65,7 +65,6 @@ module vmWithShutdown 'vm.bicep' = {
     tags: union(tags, {
       eaasAllowShutdown: 'night'
     })
-
   }
 }
 
