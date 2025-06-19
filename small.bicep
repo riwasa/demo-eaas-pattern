@@ -62,7 +62,10 @@ module vmWithShutdown 'vm.bicep' = {
     vNetResourceGroupName: vNetResourceGroupName
     vNetSubnetName: vNetSubnetName
     windowsLicenseType: windowsLicenseType
-    tags: tags
+    tags: union(tags, {
+      eaasAllowShutdown: 'night'
+    })
+
   }
 }
 

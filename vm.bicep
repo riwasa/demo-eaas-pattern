@@ -232,26 +232,26 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-11-01' = {
 }
 
 // Create a schedule for auto-shutdown of the virtual machine.
-resource autoShutdownSchedule 'Microsoft.DevTestLab/schedules@2018-09-15' = if (!empty(autoShutdownTime) && !empty(autoShutdownEmailRecipient)) {
-  #disable-next-line use-stable-resource-identifiers // The name must be unique on every call.
-  name: 'shutdown-computevm-${vmName}'
-  location: location
-  properties: {
-    dailyRecurrence: {
-      time: autoShutdownTime
-    }
-    notificationSettings: {
-      emailRecipient: autoShutdownEmailRecipient
-      status: 'Enabled'
-      timeInMinutes: 15
-    }
-    status: 'Enabled'
-    targetResourceId: vm.id
-    taskType: 'ComputeVmShutdownTask'
-    timeZoneId: 'UTC'
-  }
-  tags: tags
-}
+// resource autoShutdownSchedule 'Microsoft.DevTestLab/schedules@2018-09-15' = if (!empty(autoShutdownTime) && !empty(autoShutdownEmailRecipient)) {
+//   #disable-next-line use-stable-resource-identifiers // The name must be unique on every call.
+//   name: 'shutdown-computevm-${vmName}'
+//   location: location
+//   properties: {
+//     dailyRecurrence: {
+//       time: autoShutdownTime
+//     }
+//     notificationSettings: {
+//       emailRecipient: autoShutdownEmailRecipient
+//       status: 'Enabled'
+//       timeInMinutes: 15
+//     }
+//     status: 'Enabled'
+//     targetResourceId: vm.id
+//     taskType: 'ComputeVmShutdownTask'
+//     timeZoneId: 'UTC'
+//   }
+//   tags: tags
+// }
 
 output vmName string = vmName
 
